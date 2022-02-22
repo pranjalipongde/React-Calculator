@@ -1,0 +1,23 @@
+button {
+    border: none;
+    background-color: lightgray;
+    font-size: 24px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0px;
+    outline: 1px solid grey;
+}
+
+button:hover {
+    background-color: lightpink;
+}
+
+.equals {
+    grid-column: 3 / 5;
+    background-color: orangered;
+}
+
+.equals:hover {
+    background-color: lightgreen;
+}
