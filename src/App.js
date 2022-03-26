@@ -5,6 +5,7 @@ import Screen from "./components/Screen";
 import ButtonBox from "./components/ButtonBox";
 import Button from "./components/Button";
 
+// button values
 const btnValues = [
   ["AC", "+/-", "%", "/"],
   [7, 8, 9, "X"],
@@ -13,18 +14,22 @@ const btnValues = [
   [0, ".", "="],
 ];
 
+// for input formatting i used modified regex string
 const toLocaleString = (num) =>
   String(num).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
 
+  // for removing the spaces
 const removeSpaces = (num) => num.toString().replace(/\s/g, "");
 
 const App = () => {
+  // object to set states at once
   let [calc, setCalc] = useState({
     sign: "",
     num: 0,
     res: 0,
   });
 
+  // works only if any of num is clicked
   const numClickHandler = (e) => {
     e.preventDefault();
     const value = e.target.innerHTML;
@@ -43,6 +48,7 @@ const App = () => {
     }
   };
 
+  // works only if decimal point is pressed
   const comaClickHandler = (e) => {
     e.preventDefault();
     const value = e.target.innerHTML;
@@ -53,6 +59,7 @@ const App = () => {
     });
   };
 
+  // gets fired when the user press either +,-,* of /
   const signClickHandler = (e) => {
     setCalc({
       ...calc,
@@ -62,6 +69,7 @@ const App = () => {
     });
   };
 
+  // calculate result after equal button is pressed
   const equalsClickHandler = () => {
     if (calc.sign && calc.num) {
       const math = (a, b, sign) =>
@@ -91,6 +99,7 @@ const App = () => {
     }
   };
 
+  // 1st checks there's any enterd value or calculated and then inverts by mul with -1
   const invertClickHandler = () => {
     setCalc({
       ...calc,
@@ -100,6 +109,7 @@ const App = () => {
     });
   };
 
+  // 1st check if entered value od calculated value there and then calculate %
   const percentClickHandler = () => {
     let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
     let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
@@ -111,6 +121,7 @@ const App = () => {
     });
   };
 
+  // reset to 0 
   const resetClickHandler = () => {
     setCalc({
       ...calc,
@@ -122,11 +133,13 @@ const App = () => {
 
   return (
     <Wrapper>
+      {/* it display the entered number or calculated result*/}
       <Screen value={calc.num ? calc.num : calc.res} />
       <ButtonBox>
         {btnValues.flat().map((btn, i) => {
           return (
             <Button
+            // execute the asigned function after clicking specific button
               key={i}
               className={btn === "=" ? "equals" : ""}
               value={btn}
