@@ -15,7 +15,7 @@ button:hover {
 
 .equals {
     grid-column: 3 / 5;
-    background-color: orangered;
+    background-color: lightgreen;
 }
 
 .equals:hover {
